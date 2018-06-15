@@ -14,7 +14,7 @@ Requires: libgit2-lib
 BuildRequires : cmake
 BuildRequires : libssh2-dev
 BuildRequires : pkgconfig(libcurl)
-BuildRequires : python-dev
+
 BuildRequires : python3-dev
 BuildRequires : zlib-dev
 
