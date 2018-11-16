@@ -4,7 +4,7 @@
 #
 Name     : libgit2
 Version  : 0.27.7
-Release  : 19
+Release  : 20
 URL      : https://github.com/libgit2/libgit2/archive/v0.27.7.tar.gz
 Source0  : https://github.com/libgit2/libgit2/archive/v0.27.7.tar.gz
 Summary  : The git library, take 2
