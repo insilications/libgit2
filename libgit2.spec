@@ -4,7 +4,7 @@
 #
 Name     : libgit2
 Version  : 0.27.7
-Release  : 21
+Release  : 22
 URL      : https://github.com/libgit2/libgit2/archive/v0.27.7.tar.gz
 Source0  : https://github.com/libgit2/libgit2/archive/v0.27.7.tar.gz
 Summary  : The git library, take 2
@@ -25,14 +25,6 @@ BuildRequires : zlib-dev
 
 %description
 hey
-
-%package abi
-Summary: abi components for the libgit2 package.
-Group: Default
-
-%description abi
-abi components for the libgit2 package.
-
 
 %package dev
 Summary: dev components for the libgit2 package.
@@ -69,7 +61,7 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C
-export SOURCE_DATE_EPOCH=1542401708
+export SOURCE_DATE_EPOCH=1542747258
 mkdir -p clr-build
 pushd clr-build
 %cmake ..
@@ -77,7 +69,7 @@ make  %{?_smp_mflags} VERBOSE=1
 popd
 
 %install
-export SOURCE_DATE_EPOCH=1542401708
+export SOURCE_DATE_EPOCH=1542747258
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/libgit2
 cp COPYING %{buildroot}/usr/share/package-licenses/libgit2/COPYING
@@ -89,10 +81,6 @@ popd
 
 %files
 %defattr(-,root,root,-)
-
-%files abi
-%defattr(-,root,root,-)
-/usr/share/abi/libgit2.so.27.abi
 
 %files dev
 %defattr(-,root,root,-)
