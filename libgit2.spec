@@ -4,7 +4,7 @@
 #
 Name     : libgit2
 Version  : 0.28.1
-Release  : 24
+Release  : 25
 URL      : https://github.com/libgit2/libgit2/archive/v0.28.1.tar.gz
 Source0  : https://github.com/libgit2/libgit2/archive/v0.28.1.tar.gz
 Summary  : A linkable library for Git
