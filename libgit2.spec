@@ -4,10 +4,10 @@
 #
 Name     : libgit2
 Version  : 0.28.2
-Release  : 26
+Release  : 27
 URL      : https://github.com/libgit2/libgit2/archive/v0.28.2/libgit2-0.28.2.tar.gz
 Source0  : https://github.com/libgit2/libgit2/archive/v0.28.2/libgit2-0.28.2.tar.gz
-Summary  : A linkable library for Git
+Summary  : The git library, take 2
 Group    : Development/Tools
 License  : CC0-1.0 GPL-2.0 LGPL-2.1 MIT Zlib
 Requires: libgit2-lib = %{version}-%{release}
@@ -17,26 +17,26 @@ BuildRequires : glibc-dev
 BuildRequires : libssh2-dev
 BuildRequires : openssl-dev
 BuildRequires : pkg-config
-BuildRequires : python-dev
 BuildRequires : python3
 BuildRequires : python3-dev
 BuildRequires : zlib-dev
 
 %description
-libgit2 examples
-================
-These examples are a mixture of basic emulation of core Git command line
-functions and simple snippets demonstrating libgit2 API usage (for use
-with Docurium).  As a whole, they are not vetted carefully for bugs, error
-handling, and cross-platform compatibility in the same manner as the rest
-of the code in libgit2, so copy with caution.
+libgit2 - the Git linkable library
+==================================
+| Build Status | |
+| ------------ | - |
+| **master** branch CI builds | [![Azure Pipelines Build Status](https://dev.azure.com/libgit2/libgit2/_apis/build/status/libgit2?branchName=master)](https://dev.azure.com/libgit2/libgit2/_build/latest?definitionId=7&branchName=master)   |
+| **v0.28 branch** CI builds | [![Azure Pipelines Build Status](https://dev.azure.com/libgit2/libgit2/_apis/build/status/libgit2?branchName=maint/v0.28)](https://dev.azure.com/libgit2/libgit2/_build/latest?definitionId=7&branchName=maint/v0.28) |
+| **v0.27 branch** CI builds | [![Azure Pipelines Build Status](https://dev.azure.com/libgit2/libgit2/_apis/build/status/libgit2?branchName=maint/v0.27)](https://dev.azure.com/libgit2/libgit2/_build/latest?definitionId=7&branchName=maint/v0.27) |
+| **v0.26 branch** CI builds | [![Azure Pipelines Build Status](https://dev.azure.com/libgit2/libgit2/_apis/build/status/libgit2?branchName=maint/v0.26)](https://dev.azure.com/libgit2/libgit2/_build/latest?definitionId=7&branchName=maint/v0.26) |
+| **Nightly** builds | [![Azure Pipelines Build Status](https://libgit2.visualstudio.com/libgit2/_apis/build/status/nightly?branchName=master&label=Full+Build)](https://libgit2.visualstudio.com/libgit2/_build/latest?definitionId=9&branchName=master) [![Coverity Build Status](https://dev.azure.com/libgit2/libgit2/_apis/build/status/coverity?branchName=master&label=Coverity+Build)](https://dev.azure.com/libgit2/libgit2/_build/latest?definitionId=21?branchName=master) [![Coverity Scan Build Status](https://scan.coverity.com/projects/639/badge.svg)](https://scan.coverity.com/projects/639) |
 
 %package dev
 Summary: dev components for the libgit2 package.
 Group: Development
 Requires: libgit2-lib = %{version}-%{release}
 Provides: libgit2-devel = %{version}-%{release}
-Requires: libgit2 = %{version}-%{release}
 Requires: libgit2 = %{version}-%{release}
 
 %description dev
@@ -67,10 +67,11 @@ license components for the libgit2 package.
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
-export LANG=C
-export SOURCE_DATE_EPOCH=1558516130
+export LANG=C.UTF-8
+export SOURCE_DATE_EPOCH=1569361111
 mkdir -p clr-build
 pushd clr-build
+export GCC_IGNORE_WERROR=1
 export AR=gcc-ar
 export RANLIB=gcc-ranlib
 export NM=gcc-nm
@@ -79,11 +80,11 @@ export FCFLAGS="$CFLAGS -O3 -ffat-lto-objects -flto=4 "
 export FFLAGS="$CFLAGS -O3 -ffat-lto-objects -flto=4 "
 export CXXFLAGS="$CXXFLAGS -O3 -ffat-lto-objects -flto=4 "
 %cmake ..
-make  %{?_smp_mflags}
+make  %{?_smp_mflags}  VERBOSE=1
 popd
 
 %install
-export SOURCE_DATE_EPOCH=1558516130
+export SOURCE_DATE_EPOCH=1569361111
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/libgit2
 cp COPYING %{buildroot}/usr/share/package-licenses/libgit2/COPYING
@@ -102,7 +103,7 @@ popd
 
 %files dev
 %defattr(-,root,root,-)
-/usr/include/*.h
+/usr/include/git2.h
 /usr/include/git2/annotated_commit.h
 /usr/include/git2/apply.h
 /usr/include/git2/attr.h
