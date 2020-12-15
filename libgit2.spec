@@ -4,7 +4,7 @@
 #
 Name     : libgit2
 Version  : 0.28.4
-Release  : 31
+Release  : 32
 URL      : https://github.com/libgit2/libgit2/archive/v0.28.4/libgit2-0.28.4.tar.gz
 Source0  : https://github.com/libgit2/libgit2/archive/v0.28.4/libgit2-0.28.4.tar.gz
 Summary  : The git library, take 2
