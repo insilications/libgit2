@@ -5,7 +5,7 @@
 %define keepstatic 1
 Name     : libgit2
 Version  : 1.2.0
-Release  : 306
+Release  : 308
 URL      : file:///aot/build/clearlinux/packages/libgit2/libgit2-v1.2.0.tar.gz
 Source0  : file:///aot/build/clearlinux/packages/libgit2/libgit2-v1.2.0.tar.gz
 Summary  : No detailed summary available
@@ -55,7 +55,7 @@ unset https_proxy
 unset no_proxy
 export SSL_CERT_FILE=/var/cache/ca-certs/anchors/ca-certificates.crt
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1631661201
+export SOURCE_DATE_EPOCH=1631661898
 mkdir -p clr-build
 pushd clr-build
 export GCC_IGNORE_WERROR=1
@@ -170,16 +170,16 @@ export LIBS="${LIBS_GENERATE}"
 -DBUILD_CLAR:BOOL=ON \
 -DBUILD_EXAMPLES:BOOL=ON
 ## make_prepend64 content
-sd "\-lz" "/usr/lib64/libz.a" $(fd -uu --follow .*Makefile$) $(fd -uu --follow .*pro$) $(fd -uu --follow .*mk$) $(fd -uu --follow .*\.make$) $(fd -uu --follow link\.txt$)
-sd "\-lpcre2-8" "/usr/lib64/libpcre2-8.a" $(fd -uu --follow .*Makefile$) $(fd -uu --follow .*pro$) $(fd -uu --follow .*mk$) $(fd -uu --follow .*\.make$) $(fd -uu --follow link\.txt$)
-sd "\-lssl" "/usr/lib64/libssl.a" $(fd -uu --follow .*Makefile$) $(fd -uu --follow .*pro$) $(fd -uu --follow .*mk$) $(fd -uu --follow .*\.make$) $(fd -uu --follow link\.txt$)
-sd "\-lcrypto" "/usr/lib64/libcrypto.a" $(fd -uu --follow .*Makefile$) $(fd -uu --follow .*pro$) $(fd -uu --follow .*mk$) $(fd -uu --follow .*\.make$) $(fd -uu --follow link\.txt$)
-sd "\-lssh2" "/usr/lib64/libssh2.a" $(fd -uu --follow .*Makefile$) $(fd -uu --follow .*pro$) $(fd -uu --follow .*mk$) $(fd -uu --follow .*\.make$) $(fd -uu --follow link\.txt$)
-sd "/usr/lib64/libz.so" "/usr/lib64/libz.a" $(fd -uu --follow .*Makefile$) $(fd -uu --follow .*pro$) $(fd -uu --follow .*mk$) $(fd -uu --follow .*\.make$) $(fd -uu --follow link\.txt$)
-sd "/usr/lib64/libpcre2-8.so" "/usr/lib64/libpcre2-8.a" $(fd -uu --follow .*Makefile$) $(fd -uu --follow .*pro$) $(fd -uu --follow .*mk$) $(fd -uu --follow .*\.make$) $(fd -uu --follow link\.txt$)
-sd "/usr/lib64/libssl.so" "/usr/lib64/libssl.a" $(fd -uu --follow .*Makefile$) $(fd -uu --follow .*pro$) $(fd -uu --follow .*mk$) $(fd -uu --follow .*\.make$) $(fd -uu --follow link\.txt$)
-sd "/usr/lib64/libcrypto.so" "/usr/lib64/libcrypto.a" $(fd -uu --follow .*Makefile$) $(fd -uu --follow .*pro$) $(fd -uu --follow .*mk$) $(fd -uu --follow .*\.make$) $(fd -uu --follow link\.txt$)
-sd "/usr/lib64/libssh2.so" "/usr/lib64/libssh2.a" $(fd -uu --follow .*Makefile$) $(fd -uu --follow .*pro$) $(fd -uu --follow .*mk$) $(fd -uu --follow .*\.make$) $(fd -uu --follow link\.txt$)
+sd "\-lz" "/usr/lib64/libz.a" $(fd -uu --follow .*Makefile$) $(fd -uu --follow .*pro$) $(fd -uu --follow .*mk$) $(fd -uu --follow link\.txt$)
+sd "\-lpcre2-8" "/usr/lib64/libpcre2-8.a" $(fd -uu --follow .*Makefile$) $(fd -uu --follow .*pro$) $(fd -uu --follow .*mk$) $(fd -uu --follow link\.txt$)
+sd "\-lssl" "/usr/lib64/libssl.a" $(fd -uu --follow .*Makefile$) $(fd -uu --follow .*pro$) $(fd -uu --follow .*mk$) $(fd -uu --follow link\.txt$)
+sd "\-lcrypto" "/usr/lib64/libcrypto.a" $(fd -uu --follow .*Makefile$) $(fd -uu --follow .*pro$) $(fd -uu --follow .*mk$) $(fd -uu --follow link\.txt$)
+sd "\-lssh2" "/usr/lib64/libssh2.a" $(fd -uu --follow .*Makefile$) $(fd -uu --follow .*pro$) $(fd -uu --follow .*mk$) $(fd -uu --follow link\.txt$)
+sd "/usr/lib64/libz.so" "/usr/lib64/libz.a" $(fd -uu --follow .*Makefile$) $(fd -uu --follow .*pro$) $(fd -uu --follow .*mk$) $(fd -uu --follow link\.txt$)
+sd "/usr/lib64/libpcre2-8.so" "/usr/lib64/libpcre2-8.a" $(fd -uu --follow .*Makefile$) $(fd -uu --follow .*pro$) $(fd -uu --follow .*mk$) $(fd -uu --follow link\.txt$)
+sd "/usr/lib64/libssl.so" "/usr/lib64/libssl.a" $(fd -uu --follow .*Makefile$) $(fd -uu --follow .*pro$) $(fd -uu --follow .*mk$) $(fd -uu --follow link\.txt$)
+sd "/usr/lib64/libcrypto.so" "/usr/lib64/libcrypto.a" $(fd -uu --follow .*Makefile$) $(fd -uu --follow .*pro$) $(fd -uu --follow .*mk$) $(fd -uu --follow link\.txt$)
+sd "/usr/lib64/libssh2.so" "/usr/lib64/libssh2.a" $(fd -uu --follow .*Makefile$) $(fd -uu --follow .*pro$) $(fd -uu --follow .*mk$) $(fd -uu --follow link\.txt$)
 ## make_prepend64 end
 make  %{?_smp_mflags}    V=1 VERBOSE=1
 
@@ -254,16 +254,16 @@ unset LIBS
 -DBUILD_CLAR:BOOL=OFF \
 -DBUILD_EXAMPLES:BOOL=OFF
 ## make_prepend64 content
-sd "\-lz" "/usr/lib64/libz.a" $(fd -uu --follow .*Makefile$) $(fd -uu --follow .*pro$) $(fd -uu --follow .*mk$) $(fd -uu --follow .*\.make$) $(fd -uu --follow link\.txt$)
-sd "\-lpcre2-8" "/usr/lib64/libpcre2-8.a" $(fd -uu --follow .*Makefile$) $(fd -uu --follow .*pro$) $(fd -uu --follow .*mk$) $(fd -uu --follow .*\.make$) $(fd -uu --follow link\.txt$)
-sd "\-lssl" "/usr/lib64/libssl.a" $(fd -uu --follow .*Makefile$) $(fd -uu --follow .*pro$) $(fd -uu --follow .*mk$) $(fd -uu --follow .*\.make$) $(fd -uu --follow link\.txt$)
-sd "\-lcrypto" "/usr/lib64/libcrypto.a" $(fd -uu --follow .*Makefile$) $(fd -uu --follow .*pro$) $(fd -uu --follow .*mk$) $(fd -uu --follow .*\.make$) $(fd -uu --follow link\.txt$)
-sd "\-lssh2" "/usr/lib64/libssh2.a" $(fd -uu --follow .*Makefile$) $(fd -uu --follow .*pro$) $(fd -uu --follow .*mk$) $(fd -uu --follow .*\.make$) $(fd -uu --follow link\.txt$)
-sd "/usr/lib64/libz.so" "/usr/lib64/libz.a" $(fd -uu --follow .*Makefile$) $(fd -uu --follow .*pro$) $(fd -uu --follow .*mk$) $(fd -uu --follow .*\.make$) $(fd -uu --follow link\.txt$)
-sd "/usr/lib64/libpcre2-8.so" "/usr/lib64/libpcre2-8.a" $(fd -uu --follow .*Makefile$) $(fd -uu --follow .*pro$) $(fd -uu --follow .*mk$) $(fd -uu --follow .*\.make$) $(fd -uu --follow link\.txt$)
-sd "/usr/lib64/libssl.so" "/usr/lib64/libssl.a" $(fd -uu --follow .*Makefile$) $(fd -uu --follow .*pro$) $(fd -uu --follow .*mk$) $(fd -uu --follow .*\.make$) $(fd -uu --follow link\.txt$)
-sd "/usr/lib64/libcrypto.so" "/usr/lib64/libcrypto.a" $(fd -uu --follow .*Makefile$) $(fd -uu --follow .*pro$) $(fd -uu --follow .*mk$) $(fd -uu --follow .*\.make$) $(fd -uu --follow link\.txt$)
-sd "/usr/lib64/libssh2.so" "/usr/lib64/libssh2.a" $(fd -uu --follow .*Makefile$) $(fd -uu --follow .*pro$) $(fd -uu --follow .*mk$) $(fd -uu --follow .*\.make$) $(fd -uu --follow link\.txt$)
+sd "\-lz" "/usr/lib64/libz.a" $(fd -uu --follow .*Makefile$) $(fd -uu --follow .*pro$) $(fd -uu --follow .*mk$) $(fd -uu --follow link\.txt$)
+sd "\-lpcre2-8" "/usr/lib64/libpcre2-8.a" $(fd -uu --follow .*Makefile$) $(fd -uu --follow .*pro$) $(fd -uu --follow .*mk$) $(fd -uu --follow link\.txt$)
+sd "\-lssl" "/usr/lib64/libssl.a" $(fd -uu --follow .*Makefile$) $(fd -uu --follow .*pro$) $(fd -uu --follow .*mk$) $(fd -uu --follow link\.txt$)
+sd "\-lcrypto" "/usr/lib64/libcrypto.a" $(fd -uu --follow .*Makefile$) $(fd -uu --follow .*pro$) $(fd -uu --follow .*mk$) $(fd -uu --follow link\.txt$)
+sd "\-lssh2" "/usr/lib64/libssh2.a" $(fd -uu --follow .*Makefile$) $(fd -uu --follow .*pro$) $(fd -uu --follow .*mk$) $(fd -uu --follow link\.txt$)
+sd "/usr/lib64/libz.so" "/usr/lib64/libz.a" $(fd -uu --follow .*Makefile$) $(fd -uu --follow .*pro$) $(fd -uu --follow .*mk$) $(fd -uu --follow link\.txt$)
+sd "/usr/lib64/libpcre2-8.so" "/usr/lib64/libpcre2-8.a" $(fd -uu --follow .*Makefile$) $(fd -uu --follow .*pro$) $(fd -uu --follow .*mk$) $(fd -uu --follow link\.txt$)
+sd "/usr/lib64/libssl.so" "/usr/lib64/libssl.a" $(fd -uu --follow .*Makefile$) $(fd -uu --follow .*pro$) $(fd -uu --follow .*mk$) $(fd -uu --follow link\.txt$)
+sd "/usr/lib64/libcrypto.so" "/usr/lib64/libcrypto.a" $(fd -uu --follow .*Makefile$) $(fd -uu --follow .*pro$) $(fd -uu --follow .*mk$) $(fd -uu --follow link\.txt$)
+sd "/usr/lib64/libssh2.so" "/usr/lib64/libssh2.a" $(fd -uu --follow .*Makefile$) $(fd -uu --follow .*pro$) $(fd -uu --follow .*mk$) $(fd -uu --follow link\.txt$)
 ## make_prepend64 end
 make  %{?_smp_mflags}    V=1 VERBOSE=1
 fi
@@ -382,16 +382,16 @@ export LIBS="${LIBS_GENERATE}"
 -DBUILD_CLAR:BOOL=ON \
 -DBUILD_EXAMPLES:BOOL=ON
 ## make_prepend64 content
-sd "\-lz" "/usr/lib64/libz.a" $(fd -uu --follow .*Makefile$) $(fd -uu --follow .*pro$) $(fd -uu --follow .*mk$) $(fd -uu --follow .*\.make$) $(fd -uu --follow link\.txt$)
-sd "\-lpcre2-8" "/usr/lib64/libpcre2-8.a" $(fd -uu --follow .*Makefile$) $(fd -uu --follow .*pro$) $(fd -uu --follow .*mk$) $(fd -uu --follow .*\.make$) $(fd -uu --follow link\.txt$)
-sd "\-lssl" "/usr/lib64/libssl.a" $(fd -uu --follow .*Makefile$) $(fd -uu --follow .*pro$) $(fd -uu --follow .*mk$) $(fd -uu --follow .*\.make$) $(fd -uu --follow link\.txt$)
-sd "\-lcrypto" "/usr/lib64/libcrypto.a" $(fd -uu --follow .*Makefile$) $(fd -uu --follow .*pro$) $(fd -uu --follow .*mk$) $(fd -uu --follow .*\.make$) $(fd -uu --follow link\.txt$)
-sd "\-lssh2" "/usr/lib64/libssh2.a" $(fd -uu --follow .*Makefile$) $(fd -uu --follow .*pro$) $(fd -uu --follow .*mk$) $(fd -uu --follow .*\.make$) $(fd -uu --follow link\.txt$)
-sd "/usr/lib64/libz.so" "/usr/lib64/libz.a" $(fd -uu --follow .*Makefile$) $(fd -uu --follow .*pro$) $(fd -uu --follow .*mk$) $(fd -uu --follow .*\.make$) $(fd -uu --follow link\.txt$)
-sd "/usr/lib64/libpcre2-8.so" "/usr/lib64/libpcre2-8.a" $(fd -uu --follow .*Makefile$) $(fd -uu --follow .*pro$) $(fd -uu --follow .*mk$) $(fd -uu --follow .*\.make$) $(fd -uu --follow link\.txt$)
-sd "/usr/lib64/libssl.so" "/usr/lib64/libssl.a" $(fd -uu --follow .*Makefile$) $(fd -uu --follow .*pro$) $(fd -uu --follow .*mk$) $(fd -uu --follow .*\.make$) $(fd -uu --follow link\.txt$)
-sd "/usr/lib64/libcrypto.so" "/usr/lib64/libcrypto.a" $(fd -uu --follow .*Makefile$) $(fd -uu --follow .*pro$) $(fd -uu --follow .*mk$) $(fd -uu --follow .*\.make$) $(fd -uu --follow link\.txt$)
-sd "/usr/lib64/libssh2.so" "/usr/lib64/libssh2.a" $(fd -uu --follow .*Makefile$) $(fd -uu --follow .*pro$) $(fd -uu --follow .*mk$) $(fd -uu --follow .*\.make$) $(fd -uu --follow link\.txt$)
+sd "\-lz" "/usr/lib64/libz.a" $(fd -uu --follow .*Makefile$) $(fd -uu --follow .*pro$) $(fd -uu --follow .*mk$) $(fd -uu --follow link\.txt$)
+sd "\-lpcre2-8" "/usr/lib64/libpcre2-8.a" $(fd -uu --follow .*Makefile$) $(fd -uu --follow .*pro$) $(fd -uu --follow .*mk$) $(fd -uu --follow link\.txt$)
+sd "\-lssl" "/usr/lib64/libssl.a" $(fd -uu --follow .*Makefile$) $(fd -uu --follow .*pro$) $(fd -uu --follow .*mk$) $(fd -uu --follow link\.txt$)
+sd "\-lcrypto" "/usr/lib64/libcrypto.a" $(fd -uu --follow .*Makefile$) $(fd -uu --follow .*pro$) $(fd -uu --follow .*mk$) $(fd -uu --follow link\.txt$)
+sd "\-lssh2" "/usr/lib64/libssh2.a" $(fd -uu --follow .*Makefile$) $(fd -uu --follow .*pro$) $(fd -uu --follow .*mk$) $(fd -uu --follow link\.txt$)
+sd "/usr/lib64/libz.so" "/usr/lib64/libz.a" $(fd -uu --follow .*Makefile$) $(fd -uu --follow .*pro$) $(fd -uu --follow .*mk$) $(fd -uu --follow link\.txt$)
+sd "/usr/lib64/libpcre2-8.so" "/usr/lib64/libpcre2-8.a" $(fd -uu --follow .*Makefile$) $(fd -uu --follow .*pro$) $(fd -uu --follow .*mk$) $(fd -uu --follow link\.txt$)
+sd "/usr/lib64/libssl.so" "/usr/lib64/libssl.a" $(fd -uu --follow .*Makefile$) $(fd -uu --follow .*pro$) $(fd -uu --follow .*mk$) $(fd -uu --follow link\.txt$)
+sd "/usr/lib64/libcrypto.so" "/usr/lib64/libcrypto.a" $(fd -uu --follow .*Makefile$) $(fd -uu --follow .*pro$) $(fd -uu --follow .*mk$) $(fd -uu --follow link\.txt$)
+sd "/usr/lib64/libssh2.so" "/usr/lib64/libssh2.a" $(fd -uu --follow .*Makefile$) $(fd -uu --follow .*pro$) $(fd -uu --follow .*mk$) $(fd -uu --follow link\.txt$)
 ## make_prepend64 end
 make  %{?_smp_mflags}    V=1 VERBOSE=1
 
@@ -466,23 +466,23 @@ unset LIBS
 -DBUILD_CLAR:BOOL=OFF \
 -DBUILD_EXAMPLES:BOOL=OFF
 ## make_prepend64 content
-sd "\-lz" "/usr/lib64/libz.a" $(fd -uu --follow .*Makefile$) $(fd -uu --follow .*pro$) $(fd -uu --follow .*mk$) $(fd -uu --follow .*\.make$) $(fd -uu --follow link\.txt$)
-sd "\-lpcre2-8" "/usr/lib64/libpcre2-8.a" $(fd -uu --follow .*Makefile$) $(fd -uu --follow .*pro$) $(fd -uu --follow .*mk$) $(fd -uu --follow .*\.make$) $(fd -uu --follow link\.txt$)
-sd "\-lssl" "/usr/lib64/libssl.a" $(fd -uu --follow .*Makefile$) $(fd -uu --follow .*pro$) $(fd -uu --follow .*mk$) $(fd -uu --follow .*\.make$) $(fd -uu --follow link\.txt$)
-sd "\-lcrypto" "/usr/lib64/libcrypto.a" $(fd -uu --follow .*Makefile$) $(fd -uu --follow .*pro$) $(fd -uu --follow .*mk$) $(fd -uu --follow .*\.make$) $(fd -uu --follow link\.txt$)
-sd "\-lssh2" "/usr/lib64/libssh2.a" $(fd -uu --follow .*Makefile$) $(fd -uu --follow .*pro$) $(fd -uu --follow .*mk$) $(fd -uu --follow .*\.make$) $(fd -uu --follow link\.txt$)
-sd "/usr/lib64/libz.so" "/usr/lib64/libz.a" $(fd -uu --follow .*Makefile$) $(fd -uu --follow .*pro$) $(fd -uu --follow .*mk$) $(fd -uu --follow .*\.make$) $(fd -uu --follow link\.txt$)
-sd "/usr/lib64/libpcre2-8.so" "/usr/lib64/libpcre2-8.a" $(fd -uu --follow .*Makefile$) $(fd -uu --follow .*pro$) $(fd -uu --follow .*mk$) $(fd -uu --follow .*\.make$) $(fd -uu --follow link\.txt$)
-sd "/usr/lib64/libssl.so" "/usr/lib64/libssl.a" $(fd -uu --follow .*Makefile$) $(fd -uu --follow .*pro$) $(fd -uu --follow .*mk$) $(fd -uu --follow .*\.make$) $(fd -uu --follow link\.txt$)
-sd "/usr/lib64/libcrypto.so" "/usr/lib64/libcrypto.a" $(fd -uu --follow .*Makefile$) $(fd -uu --follow .*pro$) $(fd -uu --follow .*mk$) $(fd -uu --follow .*\.make$) $(fd -uu --follow link\.txt$)
-sd "/usr/lib64/libssh2.so" "/usr/lib64/libssh2.a" $(fd -uu --follow .*Makefile$) $(fd -uu --follow .*pro$) $(fd -uu --follow .*mk$) $(fd -uu --follow .*\.make$) $(fd -uu --follow link\.txt$)
+sd "\-lz" "/usr/lib64/libz.a" $(fd -uu --follow .*Makefile$) $(fd -uu --follow .*pro$) $(fd -uu --follow .*mk$) $(fd -uu --follow link\.txt$)
+sd "\-lpcre2-8" "/usr/lib64/libpcre2-8.a" $(fd -uu --follow .*Makefile$) $(fd -uu --follow .*pro$) $(fd -uu --follow .*mk$) $(fd -uu --follow link\.txt$)
+sd "\-lssl" "/usr/lib64/libssl.a" $(fd -uu --follow .*Makefile$) $(fd -uu --follow .*pro$) $(fd -uu --follow .*mk$) $(fd -uu --follow link\.txt$)
+sd "\-lcrypto" "/usr/lib64/libcrypto.a" $(fd -uu --follow .*Makefile$) $(fd -uu --follow .*pro$) $(fd -uu --follow .*mk$) $(fd -uu --follow link\.txt$)
+sd "\-lssh2" "/usr/lib64/libssh2.a" $(fd -uu --follow .*Makefile$) $(fd -uu --follow .*pro$) $(fd -uu --follow .*mk$) $(fd -uu --follow link\.txt$)
+sd "/usr/lib64/libz.so" "/usr/lib64/libz.a" $(fd -uu --follow .*Makefile$) $(fd -uu --follow .*pro$) $(fd -uu --follow .*mk$) $(fd -uu --follow link\.txt$)
+sd "/usr/lib64/libpcre2-8.so" "/usr/lib64/libpcre2-8.a" $(fd -uu --follow .*Makefile$) $(fd -uu --follow .*pro$) $(fd -uu --follow .*mk$) $(fd -uu --follow link\.txt$)
+sd "/usr/lib64/libssl.so" "/usr/lib64/libssl.a" $(fd -uu --follow .*Makefile$) $(fd -uu --follow .*pro$) $(fd -uu --follow .*mk$) $(fd -uu --follow link\.txt$)
+sd "/usr/lib64/libcrypto.so" "/usr/lib64/libcrypto.a" $(fd -uu --follow .*Makefile$) $(fd -uu --follow .*pro$) $(fd -uu --follow .*mk$) $(fd -uu --follow link\.txt$)
+sd "/usr/lib64/libssh2.so" "/usr/lib64/libssh2.a" $(fd -uu --follow .*Makefile$) $(fd -uu --follow .*pro$) $(fd -uu --follow .*mk$) $(fd -uu --follow link\.txt$)
 ## make_prepend64 end
 make  %{?_smp_mflags}    V=1 VERBOSE=1
 fi
 popd
 
 %install
-export SOURCE_DATE_EPOCH=1631661201
+export SOURCE_DATE_EPOCH=1631661898
 rm -rf %{buildroot}
 pushd clr-build-special
 %make_install_special  || :
