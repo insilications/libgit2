@@ -3,6 +3,7 @@
 buildreq-cmake
 glibc-dev
 libssh2-dev
+libssh2-staticdev
 openssl-dev
 openssl-staticdev
 pkg-config
