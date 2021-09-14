@@ -5,7 +5,7 @@
 %define keepstatic 1
 Name     : libgit2
 Version  : 1.2.0
-Release  : 34
+Release  : 35
 URL      : file:///aot/build/clearlinux/packages/libgit2/libgit2-v1.2.0.tar.gz
 Source0  : file:///aot/build/clearlinux/packages/libgit2/libgit2-v1.2.0.tar.gz
 Summary  : No detailed summary available
@@ -49,7 +49,7 @@ unset https_proxy
 unset no_proxy
 export SSL_CERT_FILE=/var/cache/ca-certs/anchors/ca-certificates.crt
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1631657039
+export SOURCE_DATE_EPOCH=1631657222
 mkdir -p clr-build
 pushd clr-build
 export GCC_IGNORE_WERROR=1
@@ -163,6 +163,12 @@ export LIBS="${LIBS_GENERATE}"
 -DREGEX_BACKEND:STRING="pcre2" \
 -DBUILD_SHARED_LIBS:BOOL=ON \
 -DBUILD_EXAMPLES:BOOL=ON
+## make_prepend content
+sd "\-lz" "/usr/lib64/libz.a" $(fd -uu --follow .*Makefile$) $(fd -uu --follow .*pro$) $(fd -uu --follow .*mk$)
+sd "\-lpcre2-8" "/usr/lib64/libpcre2-8.a" $(fd -uu --follow .*Makefile$) $(fd -uu --follow .*pro$) $(fd -uu --follow .*mk$)
+sd "\-lssl" "/usr/lib64/libssl.a" $(fd -uu --follow .*Makefile$) $(fd -uu --follow .*pro$) $(fd -uu --follow .*mk$)
+sd "\-lcrypto" "/usr/lib64/libcrypto.a" $(fd -uu --follow .*Makefile$) $(fd -uu --follow .*pro$) $(fd -uu --follow .*mk$)
+## make_prepend end
 make  %{?_smp_mflags}    V=1 VERBOSE=1
 
 ## profile_payload start
@@ -227,12 +233,18 @@ unset LIBS
 -DREGEX_BACKEND:STRING="pcre2" \
 -DBUILD_SHARED_LIBS:BOOL=ON \
 -DBUILD_EXAMPLES:BOOL=OFF
+## make_prepend content
+sd "\-lz" "/usr/lib64/libz.a" $(fd -uu --follow .*Makefile$) $(fd -uu --follow .*pro$) $(fd -uu --follow .*mk$)
+sd "\-lpcre2-8" "/usr/lib64/libpcre2-8.a" $(fd -uu --follow .*Makefile$) $(fd -uu --follow .*pro$) $(fd -uu --follow .*mk$)
+sd "\-lssl" "/usr/lib64/libssl.a" $(fd -uu --follow .*Makefile$) $(fd -uu --follow .*pro$) $(fd -uu --follow .*mk$)
+sd "\-lcrypto" "/usr/lib64/libcrypto.a" $(fd -uu --follow .*Makefile$) $(fd -uu --follow .*pro$) $(fd -uu --follow .*mk$)
+## make_prepend end
 make  %{?_smp_mflags}    V=1 VERBOSE=1
 fi
 popd
 
 %install
-export SOURCE_DATE_EPOCH=1631657039
+export SOURCE_DATE_EPOCH=1631657222
 rm -rf %{buildroot}
 pushd clr-build
 %make_install
