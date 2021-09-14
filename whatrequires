@@ -1,1 +1,4 @@
 # This file contains recursive sources that require this package
+gitg-dev
+libgit2-dev
+libgit2-glib-dev

@@ -5,12 +5,14 @@
 %define keepstatic 1
 Name     : libgit2
 Version  : 1.2.0
-Release  : 308
+Release  : 309
 URL      : file:///aot/build/clearlinux/packages/libgit2/libgit2-v1.2.0.tar.gz
 Source0  : file:///aot/build/clearlinux/packages/libgit2/libgit2-v1.2.0.tar.gz
 Summary  : No detailed summary available
 Group    : Development/Tools
 License  : GPL-2.0 LGPL-2.1
+Requires: libgit2-lib = %{version}-%{release}
+Requires: git
 BuildRequires : buildreq-cmake
 BuildRequires : git
 BuildRequires : glibc-dev
@@ -43,6 +45,34 @@ libgit2 - the Git linkable library
 | **v1.1 branch** CI builds | [![CI Build](https://github.com/libgit2/libgit2/workflows/CI%20Build/badge.svg?branch=maint%2Fv1.1&event=push)](https://github.com/libgit2/libgit2/actions?query=workflow%3A%22CI+Build%22+event%3Apush+branch%3Amaint%2Fv1.1) |
 | **Nightly** builds | [![Nightly Build](https://github.com/libgit2/libgit2/workflows/Nightly%20Build/badge.svg)](https://github.com/libgit2/libgit2/actions?query=workflow%3A%22Nightly+Build%22) [![Coverity Scan Status](https://scan.coverity.com/projects/639/badge.svg)](https://scan.coverity.com/projects/639) |
 
+%package dev
+Summary: dev components for the libgit2 package.
+Group: Development
+Requires: libgit2-lib = %{version}-%{release}
+Provides: libgit2-devel = %{version}-%{release}
+Requires: libgit2 = %{version}-%{release}
+
+%description dev
+dev components for the libgit2 package.
+
+
+%package lib
+Summary: lib components for the libgit2 package.
+Group: Libraries
+
+%description lib
+lib components for the libgit2 package.
+
+
+%package staticdev
+Summary: staticdev components for the libgit2 package.
+Group: Default
+Requires: libgit2-dev = %{version}-%{release}
+
+%description staticdev
+staticdev components for the libgit2 package.
+
+
 %prep
 %setup -q -n libgit2
 cd %{_builddir}/libgit2
@@ -55,7 +85,7 @@ unset https_proxy
 unset no_proxy
 export SSL_CERT_FILE=/var/cache/ca-certs/anchors/ca-certificates.crt
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1631661898
+export SOURCE_DATE_EPOCH=1631662443
 mkdir -p clr-build
 pushd clr-build
 export GCC_IGNORE_WERROR=1
@@ -482,7 +512,7 @@ fi
 popd
 
 %install
-export SOURCE_DATE_EPOCH=1631661898
+export SOURCE_DATE_EPOCH=1631662443
 rm -rf %{buildroot}
 pushd clr-build-special
 %make_install_special  || :
@@ -493,3 +523,106 @@ popd
 
 %files
 %defattr(-,root,root,-)
+
+%files dev
+%defattr(-,root,root,-)
+/usr/include/git2.h
+/usr/include/git2/annotated_commit.h
+/usr/include/git2/apply.h
+/usr/include/git2/attr.h
+/usr/include/git2/blame.h
+/usr/include/git2/blob.h
+/usr/include/git2/branch.h
+/usr/include/git2/buffer.h
+/usr/include/git2/cert.h
+/usr/include/git2/checkout.h
+/usr/include/git2/cherrypick.h
+/usr/include/git2/clone.h
+/usr/include/git2/commit.h
+/usr/include/git2/common.h
+/usr/include/git2/config.h
+/usr/include/git2/cred_helpers.h
+/usr/include/git2/credential.h
+/usr/include/git2/credential_helpers.h
+/usr/include/git2/deprecated.h
+/usr/include/git2/describe.h
+/usr/include/git2/diff.h
+/usr/include/git2/errors.h
+/usr/include/git2/filter.h
+/usr/include/git2/global.h
+/usr/include/git2/graph.h
+/usr/include/git2/ignore.h
+/usr/include/git2/index.h
+/usr/include/git2/indexer.h
+/usr/include/git2/mailmap.h
+/usr/include/git2/merge.h
+/usr/include/git2/message.h
+/usr/include/git2/net.h
+/usr/include/git2/notes.h
+/usr/include/git2/object.h
+/usr/include/git2/odb.h
+/usr/include/git2/odb_backend.h
+/usr/include/git2/oid.h
+/usr/include/git2/oidarray.h
+/usr/include/git2/pack.h
+/usr/include/git2/patch.h
+/usr/include/git2/pathspec.h
+/usr/include/git2/proxy.h
+/usr/include/git2/rebase.h
+/usr/include/git2/refdb.h
+/usr/include/git2/reflog.h
+/usr/include/git2/refs.h
+/usr/include/git2/refspec.h
+/usr/include/git2/remote.h
+/usr/include/git2/repository.h
+/usr/include/git2/reset.h
+/usr/include/git2/revert.h
+/usr/include/git2/revparse.h
+/usr/include/git2/revwalk.h
+/usr/include/git2/signature.h
+/usr/include/git2/stash.h
+/usr/include/git2/status.h
+/usr/include/git2/stdint.h
+/usr/include/git2/strarray.h
+/usr/include/git2/submodule.h
+/usr/include/git2/sys/alloc.h
+/usr/include/git2/sys/commit.h
+/usr/include/git2/sys/commit_graph.h
+/usr/include/git2/sys/config.h
+/usr/include/git2/sys/cred.h
+/usr/include/git2/sys/credential.h
+/usr/include/git2/sys/diff.h
+/usr/include/git2/sys/filter.h
+/usr/include/git2/sys/hashsig.h
+/usr/include/git2/sys/index.h
+/usr/include/git2/sys/mempack.h
+/usr/include/git2/sys/merge.h
+/usr/include/git2/sys/midx.h
+/usr/include/git2/sys/odb_backend.h
+/usr/include/git2/sys/openssl.h
+/usr/include/git2/sys/path.h
+/usr/include/git2/sys/refdb_backend.h
+/usr/include/git2/sys/reflog.h
+/usr/include/git2/sys/refs.h
+/usr/include/git2/sys/repository.h
+/usr/include/git2/sys/stream.h
+/usr/include/git2/sys/transport.h
+/usr/include/git2/tag.h
+/usr/include/git2/trace.h
+/usr/include/git2/transaction.h
+/usr/include/git2/transport.h
+/usr/include/git2/tree.h
+/usr/include/git2/types.h
+/usr/include/git2/version.h
+/usr/include/git2/worktree.h
+/usr/lib64/libgit2.so
+/usr/lib64/pkgconfig/libgit2.pc
+
+%files lib
+%defattr(-,root,root,-)
+/usr/lib64/libgit2.so.1.2
+/usr/lib64/libgit2.so.1.2.0
+
+%files staticdev
+%defattr(-,root,root,-)
+/usr/lib64/libgit2.a
