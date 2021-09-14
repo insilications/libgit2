@@ -21,4 +21,12 @@ export LIBVA_DRIVER_NAME=vdpau
 export LIBVA_DRIVERS_PATH=/usr/lib64/dri
 export GTK_RC_FILES=/etc/gtk/gtkrc
 export FONTCONFIG_PATH=/usr/share/defaults/fonts
+cp ../.gitconfig /builddir/
+pushd examples/
+./lg2 init .
+./lg2 add .
+./lg2 status
+./lg2 commit -m "test"
+./lg2 status
+popd
 ctest --parallel 1 -V --progress --timeout 200 || :

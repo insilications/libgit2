@@ -5,7 +5,7 @@
 %define keepstatic 1
 Name     : libgit2
 Version  : 1.2.0
-Release  : 301
+Release  : 305
 URL      : file:///aot/build/clearlinux/packages/libgit2/libgit2-v1.2.0.tar.gz
 Source0  : file:///aot/build/clearlinux/packages/libgit2/libgit2-v1.2.0.tar.gz
 Summary  : No detailed summary available
@@ -29,6 +29,7 @@ BuildRequires : zlib-staticdev
 # Suppress stripping binaries
 %define __strip /bin/true
 %define debug_package %{nil}
+Patch1: 6055.patch
 
 %description
 libgit2 - the Git linkable library
@@ -43,6 +44,7 @@ libgit2 - the Git linkable library
 %prep
 %setup -q -n libgit2
 cd %{_builddir}/libgit2
+%patch1 -p1
 
 %build
 unset http_proxy
@@ -50,7 +52,7 @@ unset https_proxy
 unset no_proxy
 export SSL_CERT_FILE=/var/cache/ca-certs/anchors/ca-certificates.crt
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1631658877
+export SOURCE_DATE_EPOCH=1631659986
 mkdir -p clr-build
 pushd clr-build
 export GCC_IGNORE_WERROR=1
@@ -147,7 +149,7 @@ export LIBS="${LIBS_GENERATE}"
 -DCMAKE_C_FLAGS_RELEASE:STRING="-Ofast -DNDEBUG" \
 -DCMAKE_CXX_FLAGS_RELEASE:STRING="-Ofast -DNDEBUG" \
 -DTHREADSAFE:BOOL=ON \
--DBUILD_CLAR:BOOL=OFF \
+-DBUILD_CLAR:BOOL=ON \
 -DBUILD_FUZZERS:BOOL=OFF \
 -DENABLE_TRACE:BOOL=OFF \
 -DUSE_SSH:BOOL=ON \
@@ -156,7 +158,7 @@ export LIBS="${LIBS_GENERATE}"
 -DUSE_GSSAPI:BOOL=OFF \
 -DUSE_STANDALONE_FUZZERS:BOOL=OFF \
 -DUSE_LEAK_CHECKER:BOOL=OFF \
--DDEBUG_POOL:BOOL=OF \
+-DDEBUG_POOL:BOOL=OFF \
 -DDEBUG_STRICT_ALLOC:BOOL=OFF \
 -DDEBUG_STRICT_OPEN:BOOL=OFF \
 -DENABLE_WERROR:BOOL=OFF \
@@ -169,6 +171,7 @@ sd "\-lz" "/usr/lib64/libz.a" $(fd -uu --follow .*Makefile$) $(fd -uu --follow .
 sd "\-lpcre2-8" "/usr/lib64/libpcre2-8.a" $(fd -uu --follow .*Makefile$) $(fd -uu --follow .*pro$) $(fd -uu --follow .*mk$) $(fd -uu --follow link\.txt$)
 sd "\-lssl" "/usr/lib64/libssl.a" $(fd -uu --follow .*Makefile$) $(fd -uu --follow .*pro$) $(fd -uu --follow .*mk$) $(fd -uu --follow link\.txt$)
 sd "\-lcrypto" "/usr/lib64/libcrypto.a" $(fd -uu --follow .*Makefile$) $(fd -uu --follow .*pro$) $(fd -uu --follow .*mk$) $(fd -uu --follow link\.txt$)
+sd "\-lssh2" "/usr/lib64/libssh2.a" $(fd -uu --follow .*Makefile$) $(fd -uu --follow .*pro$) $(fd -uu --follow .*mk$) $(fd -uu --follow link\.txt$)
 ## make_prepend64 end
 make  %{?_smp_mflags}    V=1 VERBOSE=1
 
@@ -199,6 +202,7 @@ export LIBVA_DRIVERS_PATH=/usr/lib64/dri
 export GTK_RC_FILES=/etc/gtk/gtkrc
 export FONTCONFIG_PATH=/usr/share/defaults/fonts
 ctest --parallel 1 -V --progress --timeout 200 || :
+exit 0
 export LD_LIBRARY_PATH="/usr/nvidia/lib64:/usr/nvidia/lib64/vdpau:/usr/nvidia/lib64/xorg/modules/drivers:/usr/nvidia/lib64/xorg/modules/extensions:/usr/local/cuda/lib64:/usr/lib64/haswell:/usr/lib64/haswell/pulseaudio:/usr/lib64/haswell/alsa-lib:/usr/lib64/haswell/gstreamer-1.0:/usr/lib64/haswell/pipewire-0.3:/usr/lib64/haswell/spa-0.2:/usr/lib64/dri:/usr/lib64/chromium:/usr/lib64:/usr/lib64/pulseaudio:/usr/lib64/alsa-lib:/usr/lib64/gstreamer-1.0:/usr/lib64/pipewire-0.3:/usr/lib64/spa-0.2:/usr/lib:/aot/intel/oneapi/compiler/latest/linux/compiler/lib/intel64_lin:/aot/intel/oneapi/compiler/latest/linux/lib:/aot/intel/oneapi/mkl/latest/lib/intel64:/aot/intel/oneapi/tbb/latest/lib/intel64/gcc4.8:/usr/share:/usr/lib64/wine:/usr/nvidia/lib32:/usr/nvidia/lib32/vdpau:/usr/lib32:/usr/lib32/wine"
 export LIBRARY_PATH="/usr/nvidia/lib64:/usr/nvidia/lib64/vdpau:/usr/nvidia/lib64/xorg/modules/drivers:/usr/nvidia/lib64/xorg/modules/extensions:/usr/local/cuda/lib64:/usr/lib64/haswell:/usr/lib64/haswell/pulseaudio:/usr/lib64/haswell/alsa-lib:/usr/lib64/haswell/gstreamer-1.0:/usr/lib64/haswell/pipewire-0.3:/usr/lib64/haswell/spa-0.2:/usr/lib64/dri:/usr/lib64/chromium:/usr/lib64:/usr/lib64/pulseaudio:/usr/lib64/alsa-lib:/usr/lib64/gstreamer-1.0:/usr/lib64/pipewire-0.3:/usr/lib64/spa-0.2:/usr/lib:/aot/intel/oneapi/compiler/latest/linux/compiler/lib/intel64_lin:/aot/intel/oneapi/compiler/latest/linux/lib:/aot/intel/oneapi/mkl/latest/lib/intel64:/aot/intel/oneapi/tbb/latest/lib/intel64/gcc4.8:/usr/share:/usr/lib64/wine:/usr/nvidia/lib32:/usr/nvidia/lib32/vdpau:/usr/lib32:/usr/lib32/wine"
 ## profile_payload end
@@ -217,7 +221,6 @@ unset LIBS
 -DCMAKE_C_FLAGS_RELEASE:STRING="-Ofast -DNDEBUG" \
 -DCMAKE_CXX_FLAGS_RELEASE:STRING="-Ofast -DNDEBUG" \
 -DTHREADSAFE:BOOL=ON \
--DBUILD_CLAR:BOOL=OFF \
 -DBUILD_FUZZERS:BOOL=OFF \
 -DENABLE_TRACE:BOOL=OFF \
 -DUSE_SSH:BOOL=ON \
@@ -226,26 +229,28 @@ unset LIBS
 -DUSE_GSSAPI:BOOL=OFF \
 -DUSE_STANDALONE_FUZZERS:BOOL=OFF \
 -DUSE_LEAK_CHECKER:BOOL=OFF \
--DDEBUG_POOL:BOOL=OF \
+-DDEBUG_POOL:BOOL=OFF \
 -DDEBUG_STRICT_ALLOC:BOOL=OFF \
 -DDEBUG_STRICT_OPEN:BOOL=OFF \
 -DENABLE_WERROR:BOOL=OFF \
 -DUSE_BUNDLED_ZLIB:BOOL=OFF \
 -DREGEX_BACKEND:STRING="pcre2" \
 -DBUILD_SHARED_LIBS:BOOL=ON \
+-DBUILD_CLAR:BOOL=OFF \
 -DBUILD_EXAMPLES:BOOL=OFF
 ## make_prepend64 content
 sd "\-lz" "/usr/lib64/libz.a" $(fd -uu --follow .*Makefile$) $(fd -uu --follow .*pro$) $(fd -uu --follow .*mk$) $(fd -uu --follow link\.txt$)
 sd "\-lpcre2-8" "/usr/lib64/libpcre2-8.a" $(fd -uu --follow .*Makefile$) $(fd -uu --follow .*pro$) $(fd -uu --follow .*mk$) $(fd -uu --follow link\.txt$)
 sd "\-lssl" "/usr/lib64/libssl.a" $(fd -uu --follow .*Makefile$) $(fd -uu --follow .*pro$) $(fd -uu --follow .*mk$) $(fd -uu --follow link\.txt$)
 sd "\-lcrypto" "/usr/lib64/libcrypto.a" $(fd -uu --follow .*Makefile$) $(fd -uu --follow .*pro$) $(fd -uu --follow .*mk$) $(fd -uu --follow link\.txt$)
+sd "\-lssh2" "/usr/lib64/libssh2.a" $(fd -uu --follow .*Makefile$) $(fd -uu --follow .*pro$) $(fd -uu --follow .*mk$) $(fd -uu --follow link\.txt$)
 ## make_prepend64 end
 make  %{?_smp_mflags}    V=1 VERBOSE=1
 fi
 popd
 
 %install
-export SOURCE_DATE_EPOCH=1631658877
+export SOURCE_DATE_EPOCH=1631659986
 rm -rf %{buildroot}
 pushd clr-build
 %make_install
