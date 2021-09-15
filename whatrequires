@@ -2,3 +2,5 @@
 gitg-dev
 libgit2-dev
 libgit2-glib-dev
+libgit2-staticdev
+pygit2

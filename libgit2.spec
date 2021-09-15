@@ -4,10 +4,10 @@
 #
 %define keepstatic 1
 Name     : libgit2
-Version  : 1.2.0
-Release  : 309
-URL      : file:///aot/build/clearlinux/packages/libgit2/libgit2-v1.2.0.tar.gz
-Source0  : file:///aot/build/clearlinux/packages/libgit2/libgit2-v1.2.0.tar.gz
+Version  : 1.1.1
+Release  : 310
+URL      : https://github.com/libgit2/libgit2/archive/refs/tags/v1.1.1.tar.gz
+Source0  : https://github.com/libgit2/libgit2/archive/refs/tags/v1.1.1.tar.gz
 Summary  : No detailed summary available
 Group    : Development/Tools
 License  : GPL-2.0 LGPL-2.1
@@ -24,6 +24,7 @@ BuildRequires : pcre2-dev
 BuildRequires : pcre2-staticdev
 BuildRequires : pkg-config
 BuildRequires : pkgconfig(libcurl)
+BuildRequires : pytest
 BuildRequires : python3
 BuildRequires : python3-dev
 BuildRequires : python3-staticdev
@@ -32,18 +33,16 @@ BuildRequires : zlib-staticdev
 # Suppress stripping binaries
 %define __strip /bin/true
 %define debug_package %{nil}
-Patch1: 6055.patch
-Patch2: 0001-Add-.gitconfig-for-tests.patch
+Patch1: 0001-Add-.gitconfig-for-tests.patch
 
 %description
 libgit2 - the Git linkable library
 ==================================
 | Build Status | |
 | ------------ | - |
-| **main** branch CI builds | [![CI Build](https://github.com/libgit2/libgit2/workflows/CI%20Build/badge.svg?event=push)](https://github.com/libgit2/libgit2/actions?query=workflow%3A%22CI+Build%22+event%3Apush) |
-| **v1.2 branch** CI builds | [![CI Build](https://github.com/libgit2/libgit2/workflows/CI%20Build/badge.svg?branch=maint%2Fv1.2&event=push)](https://github.com/libgit2/libgit2/actions?query=workflow%3A%22CI+Build%22+event%3Apush+branch%3Amaint%2Fv1.2) |
+| Build Status | |
+| ------------ | - |
 | **v1.1 branch** CI builds | [![CI Build](https://github.com/libgit2/libgit2/workflows/CI%20Build/badge.svg?branch=maint%2Fv1.1&event=push)](https://github.com/libgit2/libgit2/actions?query=workflow%3A%22CI+Build%22+event%3Apush+branch%3Amaint%2Fv1.1) |
-| **Nightly** builds | [![Nightly Build](https://github.com/libgit2/libgit2/workflows/Nightly%20Build/badge.svg)](https://github.com/libgit2/libgit2/actions?query=workflow%3A%22Nightly+Build%22) [![Coverity Scan Status](https://scan.coverity.com/projects/639/badge.svg)](https://scan.coverity.com/projects/639) |
 
 %package dev
 Summary: dev components for the libgit2 package.
@@ -74,10 +73,9 @@ staticdev components for the libgit2 package.
 
 
 %prep
-%setup -q -n libgit2
-cd %{_builddir}/libgit2
+%setup -q -n libgit2-1.1.1
+cd %{_builddir}/libgit2-1.1.1
 %patch1 -p1
-%patch2 -p1
 
 %build
 unset http_proxy
@@ -85,7 +83,7 @@ unset https_proxy
 unset no_proxy
 export SSL_CERT_FILE=/var/cache/ca-certs/anchors/ca-certificates.crt
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1631662443
+export SOURCE_DATE_EPOCH=1631679220
 mkdir -p clr-build
 pushd clr-build
 export GCC_IGNORE_WERROR=1
@@ -512,7 +510,7 @@ fi
 popd
 
 %install
-export SOURCE_DATE_EPOCH=1631662443
+export SOURCE_DATE_EPOCH=1631679220
 rm -rf %{buildroot}
 pushd clr-build-special
 %make_install_special  || :
@@ -587,7 +585,6 @@ popd
 /usr/include/git2/submodule.h
 /usr/include/git2/sys/alloc.h
 /usr/include/git2/sys/commit.h
-/usr/include/git2/sys/commit_graph.h
 /usr/include/git2/sys/config.h
 /usr/include/git2/sys/cred.h
 /usr/include/git2/sys/credential.h
@@ -597,7 +594,6 @@ popd
 /usr/include/git2/sys/index.h
 /usr/include/git2/sys/mempack.h
 /usr/include/git2/sys/merge.h
-/usr/include/git2/sys/midx.h
 /usr/include/git2/sys/odb_backend.h
 /usr/include/git2/sys/openssl.h
 /usr/include/git2/sys/path.h
@@ -620,8 +616,8 @@ popd
 
 %files lib
 %defattr(-,root,root,-)
-/usr/lib64/libgit2.so.1.2
-/usr/lib64/libgit2.so.1.2.0
+/usr/lib64/libgit2.so.1.1
+/usr/lib64/libgit2.so.1.1.1
 
 %files staticdev
 %defattr(-,root,root,-)
